@@ -9,13 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "../Demo/index.js":
-/*!************************!*\
-  !*** ../Demo/index.js ***!
-  \************************/
+/***/ "./src/Demo/index.js":
+/*!***************************!*\
+  !*** ./src/Demo/index.js ***!
+  \***************************/
 /***/ (() => {
 
-eval("Page({\n  data: {\n    motto: \"Hello World\",\n    userInfo: {},\n    hasUserInfo: false\n  },\n\n  getUserProfile(e) {\n    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗\n    wx.getUserProfile({\n      desc: \"展示用户信息\",\n      // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写\n      success: res => {\n        this.data.userInfo = res.userInfo;\n        this.data.hasUserInfo = true;\n      }\n    });\n  }\n\n});\n\n//# sourceURL=webpack:///../Demo/index.js?");
+eval("Page({\n  data: {\n    motto: \"Hello World\",\n    userInfo: {},\n    hasUserInfo: false\n  },\n\n  getUserProfile(e) {\n    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗\n    wx.getUserProfile({\n      desc: \"展示用户信息\",\n      // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写\n      success: res => {\n        this.data.userInfo = res.userInfo;\n        this.data.hasUserInfo = true;\n      }\n    });\n  }\n\n});\n\n//# sourceURL=webpack://mini-app/./src/Demo/index.js?");
 
 /***/ })
 
@@ -26,7 +26,7 @@ eval("Page({\n  data: {\n    motto: \"Hello World\",\n    userInfo: {},\n    has
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["../Demo/index.js"]();
+/******/ 	__webpack_modules__["./src/Demo/index.js"]();
 /******/ 	
 /******/ })()
 ;

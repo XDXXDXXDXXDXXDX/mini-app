@@ -1,4 +1,5 @@
 var path = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
@@ -31,6 +32,7 @@ module.exports = {
         { from: __dirname + "/src/Demo/dist", to: __dirname + "/dist/demo" },
       ],
     }),
+    new CleanWebpackPlugin(),
   ],
   devServer: {
     contentBase: path.join(__dirname, "dist"),

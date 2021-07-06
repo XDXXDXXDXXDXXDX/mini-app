@@ -2,17 +2,18 @@ const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 webpack(
   {
     mode: "development",
     entry: {
-      page: "../Demo/index.js",
-      index: "./template/index.js",
+      page: path.resolve(__dirname, "../Demo/index.js"),
+      index: path.resolve(__dirname, "./template/index.js"),
     },
     output: {
       filename: "[name].js",
-      path: path.resolve("../Demo", "dist"),
+      path: path.resolve(__dirname, "../Demo/dist"),
     },
     module: {
       rules: [
@@ -33,9 +34,10 @@ webpack(
     plugins: [
       new VueLoaderPlugin(),
       new HtmlWebpackPlugin({
-        template: "./template/index.html",
+        template: path.resolve(__dirname, "./template/index.html"),
         chunks: ["index"],
       }),
+      new CleanWebpackPlugin(),
     ],
   },
   (err, stats) => {
@@ -43,7 +45,6 @@ webpack(
     if (err || stats.hasErrors()) {
       console.log(err);
     }
-    // console.log(stats);
     // 处理完成
   }
 );
