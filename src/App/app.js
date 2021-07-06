@@ -1,11 +1,24 @@
 const INTERFACE = ["getUserProfile"]; // 原生接口列表
-let webviewReady = false;
+let webviewReady = false; // 视图层是否准备完毕
 
-const service = new Worker("service.js");
-const view = document.getElementById("View");
+const service = new Worker("service.js"); // 逻辑层
+const view = document.getElementById("View"); // 视图层
 const viewContent = view.contentWindow;
 
+// 加载用户逻辑脚本，实际运行时按照加载的小程序下载对应的脚本
 let pageScript = "";
+fetch("/demo/page.js")
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(pageScript) {
+    service.postMessage({
+      type: "invokeScript",
+      data: {
+        script: pageScript,
+      },
+    });
+  });
 
 // 通知逻辑层注册原生提供的接口
 service.postMessage({
@@ -13,12 +26,13 @@ service.postMessage({
   data: INTERFACE,
 });
 
-// 接受逻辑层的消息
-const messageCache = []; // 当视图层还未准备好接受消息时，所有消息会暂存在此
+// 订阅逻辑层的消息
+const messageCache = [];
 service.onmessage = function(e) {
   const { data: eventData } = e;
   const { type, data, target } = eventData;
   if (target === "view") {
+    // 视图层还未准备好的情况下要把发送到视图层的消息缓存起来
     if (webviewReady) {
       viewContent.postMessage(eventData, "*");
     } else {
@@ -33,7 +47,7 @@ service.onmessage = function(e) {
   }
 };
 
-// 接受视图层的消息
+// 订阅视图层的消息
 window.addEventListener(
   "message",
   function(event) {
@@ -84,34 +98,4 @@ function getUserProfile() {
       nickName: "好孩子",
     },
   };
-}
-
-// 加载用户逻辑脚本
-fetch("/demo/page.js")
-  .then(function(response) {
-    return response.text();
-  })
-  .then(function(pageScript) {
-    service.postMessage({
-      type: "invokeScript",
-      data: {
-        script: pageScript,
-      },
-    });
-  });
-
-function getPageScript() {
-  fetch("/demo/page.js")
-    .then(function(response) {
-      return response.text();
-    })
-    .then(function(script) {
-      pageScript = script;
-      service.postMessage({
-        type: "invokeScript",
-        data: {
-          script: pageScript,
-        },
-      });
-    });
 }

@@ -1,6 +1,6 @@
 const CALLBACK = {}; // 回调列表
 const wx = {}; // 接口列表
-const PAGE = {};
+const PAGE = {}; // 页面列表
 
 // 初始化事件监听，响应原生的事件
 onmessage = function(e) {
@@ -45,6 +45,7 @@ function initializeFeature(features) {
   });
 }
 
+// 页面执行方法，供用户逻辑层代码调用
 function Page(pageInfo) {
   const pageId = `iframe${Date.now()}`;
   const proxyData = new Proxy(pageInfo.data, {
