@@ -1,6 +1,6 @@
 # mini-app
 
-基础 web worker 和 iframe 实现的小程序框架
+基于 web worker 和 iframe 实现的小程序框架
 
 具备一个小程序应用框架的基础功能：
 
