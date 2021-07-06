@@ -9,12 +9,18 @@
 - 逻辑层接口调用
 - 视图层的视图更新
 
+安装依赖
 ```
 npm install
 ```
-`npm install 安装依赖`
-`npm run build 构建项目`
-`npm run server 开始开发`
+构建项目
+```
+npm run build
+```
+开始开发
+```
+npm run server
+```
 
 ## App
 
