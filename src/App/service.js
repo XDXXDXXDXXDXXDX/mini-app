@@ -16,6 +16,13 @@ onmessage = function(e) {
     case "invokeScript":
       eval(data.script);
       break;
+    case "eventHappen":
+      const { type, pageId, method } = data;
+      switch (type) {
+        case "tap":
+          PAGE[pageId][method]();
+      }
+      break;
   }
 };
 
@@ -38,20 +45,31 @@ function initializeFeature(features) {
   });
 }
 
-function Page(data) {
+function Page(pageInfo) {
+  const pageId = `iframe${Date.now()}`;
+  const proxyData = new Proxy(pageInfo.data, {
+    set(obj, prop, value) {
+      if (obj[prop] !== value) {
+        obj[prop] = value;
+        postMessage({
+          target: "view",
+          type: "setData",
+          data: {
+            [prop]: value,
+          },
+        });
+        return true;
+      }
+    },
+  });
+
+  PAGE[pageId] = { ...pageInfo, data: proxyData };
   postMessage({
     target: "view",
     type: "pageReady",
     data: {
-      initalData: data.data,
+      pageId,
+      initalData: pageInfo.data,
     },
   });
 }
-
-setTimeout(() => {
-  wx.getUserProfile({
-    success: (data) => {
-      console.log("ok", data);
-    },
-  });
-}, 2000);

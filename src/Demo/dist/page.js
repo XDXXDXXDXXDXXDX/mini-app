@@ -15,7 +15,7 @@
   \************************/
 /***/ (() => {
 
-eval("Page({\n  data: {\n    motto: \"Hello World\",\n    userInfo: {},\n    hasUserInfo: false\n  },\n\n  getUserProfile(e) {\n    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗\n    wx.getUserProfile({\n      desc: \"展示用户信息\",\n      // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写\n      success: res => {\n        console.log(res);\n        this.setData({\n          userInfo: res.userInfo,\n          hasUserInfo: true\n        });\n      }\n    });\n  }\n\n});\n\n//# sourceURL=webpack:///../Demo/index.js?");
+eval("Page({\n  data: {\n    motto: \"Hello World\",\n    userInfo: {},\n    hasUserInfo: false\n  },\n\n  getUserProfile(e) {\n    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗\n    wx.getUserProfile({\n      desc: \"展示用户信息\",\n      // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写\n      success: res => {\n        this.data.userInfo = res.userInfo;\n        this.data.hasUserInfo = true;\n      }\n    });\n  }\n\n});\n\n//# sourceURL=webpack:///../Demo/index.js?");
 
 /***/ })
 
